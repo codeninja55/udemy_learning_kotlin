@@ -8,6 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="org.junit.jupiter:junit-jupiter:5.4.2" level="project" />
+    <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
   </component>
   <component name="PackageRequirementsSettings">
     <option name="requirementsPath" value="" />
