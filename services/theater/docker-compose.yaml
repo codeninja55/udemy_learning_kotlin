@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  spring:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      labels:
+        theater: "development"
+    image: theater:0.1
+#    logging:
+#      driver: fluentd
+#      options:
+#        fluentd-address: localhost:24224
+#        tag: spring.docker.access
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    networks:
+      - dev_subnet
+
+networks:
+  dev_subnet:
+    driver: bridge
+    labels:
+      theater: "development"
