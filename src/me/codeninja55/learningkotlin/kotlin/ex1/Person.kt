@@ -40,9 +40,7 @@ data class Person(
     }
 
     fun getColorType() : String {
-        val color = getColor()
-
-        return when (color) {
+        return when (getColor()) {
             "" -> "empty"
             "RED", "GREEN", "BLUE" -> "rgb"
             else -> "other"
@@ -53,6 +51,8 @@ data class Person(
         private var idCounter: Long = 0
         fun getNewId() = ++idCounter
 
+        // Annotation makes this static method available to Java directly
+        @JvmStatic
         fun getAge(dateOfBirth: Calendar?) : Int? {
             if (dateOfBirth == null) return null
 
