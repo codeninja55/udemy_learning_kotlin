@@ -3,7 +3,7 @@ version: '3.7'
 services:
   spring:
     build:
-      context: .
+      context: services/theater
       dockerfile: Dockerfile
       labels:
         theater: "development"
@@ -17,6 +17,30 @@ services:
       - 8080:8080
     expose:
       - 8080
+    networks:
+      - dev_subnet
+
+  client:
+    build:
+      context: services/client
+      dockerfile: Dockerfile
+      labels:
+        arclytics.io: "development"
+    image: theater_client:0.1
+    volumes:
+      - ./services/client:/usr/src/app
+      - /usr/src/app/node_modules
+#    logging:
+#      driver: fluentd
+#      options:
+#        fluentd-address: localhost:24224
+#        tag: client.docker.access
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    environment:
+      - NODE_ENV=development
     networks:
       - dev_subnet
 
