@@ -8,7 +8,7 @@ data class Person(
     val surname: String?,
     val dateOfBirth: Calendar?
 ) {
-    private val id: Long
+    val id: Long
     val age: Int? get() = getAge(this.dateOfBirth)
     // Elvis operator -- similar to ternary operator and does null-safety check
     val safeAge: Int get() = age ?: -1
@@ -20,6 +20,11 @@ data class Person(
         if (title == null || firstName == null || surname == null)
             throw NullPointerException()
     }
+
+    // Add additional components
+    operator fun component5() = id
+    operator fun component6() = age
+    operator fun component7() = favouriteColor
 
     // Elvis operator and null-safety check to overcome smart casting for a mutable variable like color.
     fun getColor() : String = favouriteColor?.toUpperCase() ?: "NOT SET"
