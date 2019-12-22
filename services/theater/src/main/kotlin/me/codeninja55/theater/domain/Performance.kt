@@ -1,16 +1,15 @@
 package me.codeninja55.theater.domain
 
-import com.sun.istack.NotNull
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class Performance(@Id @GeneratedValue(strategy = GenerationType.AUTO)
                        val id: Long,
-                       @NotNull
                        val title: String) {
+
+    @OneToMany(mappedBy = "performance")
+    lateinit var bookings: List<Booking>
+
     override fun toString(): String {
         return "Performance(id=$id, title='$title')"
     }

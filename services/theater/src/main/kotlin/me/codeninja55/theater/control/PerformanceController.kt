@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView
 
 @Controller
 @RequestMapping("/performances")
-class PerformanceController() {
+class PerformanceController {
 
     @Autowired
     lateinit var performanceRepository: PerformanceRepository

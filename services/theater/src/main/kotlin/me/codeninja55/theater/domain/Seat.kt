@@ -1,6 +1,5 @@
 package me.codeninja55.theater.domain
 
-import com.sun.istack.NotNull
 import java.math.BigDecimal
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -22,11 +21,8 @@ import javax.persistence.Id
 @Entity
 data class Seat(@Id @GeneratedValue(strategy = GenerationType.AUTO)
                 val id: Long,
-                @NotNull
                 val seatRow: Char,
-                @NotNull
                 val seatNum: Int,
-                @NotNull
                 val price: BigDecimal,
                 val description: String) {
     override fun toString(): String = "$seatRow-$seatNum $$price ($description)"
