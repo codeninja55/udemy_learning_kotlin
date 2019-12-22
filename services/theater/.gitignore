@@ -29,3 +29,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/out/production/udemy_learning_kotlin/

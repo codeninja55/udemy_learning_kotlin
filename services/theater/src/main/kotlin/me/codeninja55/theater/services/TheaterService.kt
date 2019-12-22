@@ -48,8 +48,9 @@ class TheaterService {
             for (num in 1..36) {
                 _seats.add(
                     Seat(
-                        row = (row+64).toChar(),
-                        num = num,
+                        id = 0,
+                        seatRow = (row+64).toChar(),
+                        seatNum = num,
                         price = getPrice(row, num),
                         description = getDescription(row, num)
                     )
@@ -59,6 +60,6 @@ class TheaterService {
     }
 
     fun find(num: Int, row: Char) : Seat? {
-        return seats.first { it.row == row && it.num == num }
+        return seats.first { it.seatRow == row && it.seatNum == num }
     }
 }

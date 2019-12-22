@@ -1,5 +1,6 @@
 package me.codeninja55.theater.control
 
+import me.codeninja55.theater.data.SeatRepository
 import me.codeninja55.theater.services.BookingService
 import me.codeninja55.theater.services.TheaterService
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,6 +29,9 @@ class MainController {
     @Autowired
     lateinit var bookingService: BookingService
 
+    @Autowired
+    lateinit var seatRepository: SeatRepository
+
     @RequestMapping(value = ["checkAvailability"], method = [RequestMethod.POST])
     fun checkAvailability(bean: CheckAvailabilityBackingBean) : ModelAndView {
         val selectedSeat = theaterService.find(
@@ -37,6 +41,17 @@ class MainController {
         bean.result = "Seat $selectedSeat is ${if (result) "available" else "booked"}."
         return ModelAndView("seatBooking", "bean", bean)
     }
+
+    /**
+     * API endpoint for bootstrapping the database with seats.
+     */
+    /*@RequestMapping("bootstrap")
+    fun createInitialData() : ModelAndView {
+        // create the data and save it to the database
+        val seats = theaterService.seats
+        seatRepository.saveAll(seats)
+        return homePage()
+    }*/
 }
 
 class CheckAvailabilityBackingBean() {
