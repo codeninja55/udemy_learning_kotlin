@@ -54,19 +54,38 @@ class MainController {
         bean.performance = selectedPerformance
         bean.available = bookingService.isSeatFree(selectedSeat, selectedPerformance)
 
-        return ModelAndView("seatBooking", "bean", bean)
+        if (!bean.available!!)
+            bean.booking = bookingService.findBooking(selectedSeat, selectedPerformance)
+
+        val model = mapOf<String, Any>(
+            "bean" to bean,
+            "performances" to performanceRepository.findAll(),
+            "seatNums" to 1..36,
+            "seatRows" to 'A'..'O'
+        )
+
+        return ModelAndView("seatBooking", model)
+    }
+
+    @RequestMapping("booking", method = [RequestMethod.POST])
+    fun bookSeat(bean: CheckAvailabilityBackingBean) : ModelAndView {
+        val booking = bookingService.reserveSeat(bean.seat!!, bean.performance!!, bean.customerName)
+        return ModelAndView("bookingConfirmed", "booking", booking)
     }
 
     /**
      * API endpoint for bootstrapping the database with seats.
      */
-    /*@RequestMapping("bootstrap")
+    @RequestMapping("bootstrap")
     fun createInitialData() : ModelAndView {
         // create the data and save it to the database
         val seats = theaterService.seats
         seatRepository.saveAll(seats)
+        performanceRepository.save(Performance(0, "Avengers: Endgame"))
+        performanceRepository.save(Performance(0, "Star Wars: The Last Jedi"))
+        performanceRepository.save(Performance(0, "Star Wars: The Rise of Skywalker"))
         return homePage()
-    }*/
+    }
 }
 
 class CheckAvailabilityBackingBean() {
